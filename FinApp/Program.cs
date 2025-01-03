@@ -10,9 +10,13 @@ builder.Services.AddControllersWithViews();
 //builder.Services.AddDbContext<ApplicationDbContext>(options => {
 //    options.UseSqlServer(builder.Configuration["ConnectionStrings:FinAppDBConnection"]);
 //});
+//builder.Services.AddDbContext<ApplicationDbContext>(options => {
+//    options.UseSqlServer(builder.Configuration["ConnectionStrings:AzureDBConnection"]);
+//});
 builder.Services.AddDbContext<ApplicationDbContext>(options => {
-    options.UseSqlServer(builder.Configuration["ConnectionStrings:AzureDBConnection"]);
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:MonsterAspDBConnection"]);
 });
+//MonsterAspDBConnection
 builder.Services.Configure<IdentityOptions>(options => {
     options.User.RequireUniqueEmail = true;
     options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUWXYZ1234567890";
