@@ -1,0 +1,173 @@
+﻿@using FinApp.ViewModels
+@model BudgetPlannerVM
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Budget Planner - year</h2>
+<div>
+    <p class="lh-sm m-2">
+        This is a financial planner, and it works differently from other common planners.
+        In this tab, you plan your yearly expenses. You don’t log what has already been
+        paid or track small everyday expenses like coffee or minor purchases. 
+        Instead, you define recurring expenses, select the months in which they will occur, 
+        and assign them to a bank account.
+    </p>
+</div>
+<div>
+    <p class="lh-sm m-2">
+        The planner will then display the total amount needed for expenses in a given month and
+        the current balance of your accounts. Its purpose is simple: to give you an overview of
+        how much money you’ll need for regular monthly expenses — nothing more.
+    </p>
+</div>
+<div>
+    <ul class ="list-group list-group-flush">
+        <li class="list-group-item">The <span class="fw-bold">Create Bank Account</span> button: create a bank account.</li>
+        <li class="list-group-item">The <span class="fw-bold">Create Expense</span> button create an expense.</li>
+        <li class="list-group-item">The <span class="fw-bold">Generate Table</span> button: generate all relevant expenses for this month.</li>
+    </ul>
+</div>
+<div>
+    <p class="lh-sm m-2">
+        Each bank account/expense has two actions: <span class="fw-bold">Edit</span> and <span class="fw-bold">Delete</span>.
+        You can either delete or edit the bank account/expense. Delete action is irreversible.</p>
+</div>
+<table class="table table-hover table-success">
+    <thead>
+        <tr>
+            <th>Bank or Expense name</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Which bank account will be used for the payment?</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.BankAccounts)
+        {
+            <tr class="table-success position-relative">
+                <td>@item.Name</td>
+                <td>@item.Amount</td>
+                <td>
+                    @item.Description
+                    <form class="" asp-controller="BankAccount" method="post">
+
+                        <button class="btn dropdown-toggle position-absolute top-0 end-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li> <a class="btn dropdown-item btn-outline-warning" asp-controller="BankAccount" asp-action="Edit" asp-route-id="@item.Id">Edit</a></li>
+                            <li><a class="btn dropdown-item btn-outline-danger " data-bs-toggle="modal" data-bs-target="#confirmDeleteModal-@item.Id">Delete</a></li>
+
+                        </ul>
+
+
+                        @* <input class="btn btn-danger" asp-action="Delete" asp-route-id=@item.Id type="submit" onclick="return confirm('Opravdu chcete tuto položku smazat?');" value="Delete" />  *@
+                    </form>
+                </td>
+                <td></td>
+            </tr>
+            <!-- Modální okno -->
+            <div class="modal fade" id="confirmDeleteModal-@item.Id" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmDeleteModalLabel">Potvrzení smazání</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Opravdu chcete tuto položku smazat?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušit</button>
+                            <!-- Formulář pro potvrzení smazání -->
+                            <form asp-controller="BankAccount" asp-action="Delete" method="post">
+                                @Html.AntiForgeryToken()
+                                <input class="btn btn-danger" asp-controller="BankAccount" asp-action="Delete" asp-route-id=@item.Id type="submit" value="Delete" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+        @*   @foreach(var item in Model.MonthlyExpenses){  *@
+        @* @await Html.PartialAsync("/Views/MonthlyExpense/_Index.cshtml", Model.MonthlyExpenses) *@
+        @*  }  *@
+        @foreach (var item in Model.MonthlyExpenses)
+        {
+            <tr class="table-warning position-relative">
+                <td>@item.Name</td>
+                <td>@item.Amount</td>
+                <td>
+                    @item.Description
+                    <form class="" asp-controller="MonthlyExpense" method="post">
+                        @* data-bs-toggle="modal" *@
+                        <button class="btn dropdown-toggle position-absolute top-0 end-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li> <a class="btn dropdown-item btn-outline-warning" asp-controller="MonthlyExpense" asp-action="Edit" asp-route-id="@item.Id">Edit</a></li>
+                            <li><a class="btn dropdown-item btn-outline-danger " data-bs-toggle="modal" data-bs-target="#confirmDeleteModalExpenses-@item.Id">Delete</a></li>
+
+                        </ul>
+
+                        @* <input class="btn btn-danger" asp-action="Delete" asp-route-id=@item.Id type="submit" onclick="return confirm('Opravdu chcete tuto položku smazat?');" value="Delete" /> *@
+                    </form>
+                </td>
+                <td>@item.BankAccountName</td>
+            </tr>
+            <!-- Modální okno -->
+            <div class="modal fade" id="confirmDeleteModalExpenses-@item.Id" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmDeleteModalLabel">Potvrzení smazání</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Opravdu chcete tuto položku smazat?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušit</button>
+                            <!-- Formulář pro potvrzení smazání -->
+                            <form asp-controller="MonthlyExpense" asp-action="Delete" method="post">
+                                @Html.AntiForgeryToken()
+                                <input class="btn btn-danger " asp-controller="MonthlyExpense" asp-action="Delete" asp-route-id=@item.Id type="submit" value="Delete" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+        <tr>
+            <td class="fw-bold">Sum of all monthly recurring expenses</td>
+            <td></td>
+            <td>@Model.MonthlyExpensesBalance</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="fw-bold">Account balance</td>
+            <td></td>
+            <td>@Model.BankAccountsBalance</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+
+<div>
+    <form method="post" asp-controller="CurrentMonth" asp-action="DeleteAll">
+    <a class="btn btn-success" asp-controller="BankAccount" asp-route-id="@Model.BankAccounts" asp-action="Create">Create Bank Account</a>
+    <a class="btn btn-success" asp-controller="MonthlyExpense" asp-route-id="@Model.MonthlyExpenses" asp-action="Create">Create Expense</a>
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-success">Generate table</button>
+    </form>
+</div>
+
+
+
+
+
+

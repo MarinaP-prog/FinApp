@@ -1,0 +1,62 @@
+﻿@using FinApp.DTO
+@using FinApp.ViewModels
+@model MonthlyExpenseDTO?
+@{
+    ViewData["Title"] = "Create";
+}
+<div>
+    <a class="btn btn-primary mt-2" asp-controller="BudgetPlannerVM" asp-action="Index">Back to List</a>
+</div>
+<form asp-controller="MonthlyExpense" asp-action="Create" >
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label for="Name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Amount"></label>
+        <input type="number" asp-for="Amount" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input type="text" asp-for="Description" class="form-control" />
+    </div>
+    <div>
+        <label asp-for="BankAccountId">Please pick bank account</label>
+        <select asp-for="BankAccountId" class="form-control" asp-items="ViewBag.bankAccount"></select>
+    </div>
+
+    <div class="form-check btn-group my-3" role="group">
+        <input type="checkbox" class="form-check-input btn-check" id="IsJanuary" name="IsJanuary" @Html.CheckBoxFor(model => model.IsJanuary)
+        <label class="btn btn-outline-primary" for="IsJanuary">January</label>
+        <input type="checkbox" class="form-check-input btn-check" id="IsFebruary" name="IsFebruary" @Html.CheckBoxFor(model => model.IsFebruary)
+        <label class="btn btn-outline-primary" for="IsFebruary">February</label>
+        <input type="checkbox" class="form-check-input btn-check" id="IsMarch" name="IsMarch" @Html.CheckBoxFor(model => model.IsMarch)
+        <label class="btn btn-outline-primary" for="IsMarch">March</label>
+        <input type="checkbox" class="form-check-input btn-check" id="IsApril" name="IsApril" @Html.CheckBoxFor(model => model.IsApril)
+        <label class="btn btn-outline-primary" for="IsApril">April</label>
+        <input type="checkbox" class="form-check-input btn-check" id="IsMay" name="IsMay" @Html.CheckBoxFor(model => model.IsMay)
+        <label class="btn btn-outline-primary" for="IsMay">May</label>
+        <input type="checkbox" class="form-check-input btn-check" id="IsJune" name="IsJune" @Html.CheckBoxFor(model => model.IsJune)
+        <label class="btn btn-outline-primary" for="IsJune">June</label>
+        <input type="checkbox" class="form-check-input btn-check" id="IsJuly" name="IsJuly" @Html.CheckBoxFor(model => model.IsJuly)
+        <label class="btn btn-outline-primary" for="IsJuly">July</label>
+        <input type="checkbox" class="form-check-input btn-check" id="IsAugust" name="IsAugust" @Html.CheckBoxFor(model => model.IsAugust)
+        <label class="btn btn-outline-primary" for="IsAugust">August</label>
+        <input type="checkbox" class="form-check-input btn-check" id="IsSeptember" name="IsSeptember" @Html.CheckBoxFor(model => model.IsSeptember)
+        <label class="btn btn-outline-primary" for="IsSeptember">September</label>
+        <input type="checkbox" class="form-check-input btn-check" id="IsOctober" name="IsOctober" @Html.CheckBoxFor(model => model.IsOctober)
+        <label class="btn btn-outline-primary" for="IsOctober">October</label>
+        <input type="checkbox" class="form-check-input btn-check" id="IsNovember" name="IsNovember" @Html.CheckBoxFor(model => model.IsNovember)
+        <label class="btn btn-outline-primary" for="IsNovember">November</label>
+        <input type="checkbox" class="form-check-input btn-check" id="IsDecember" name="IsDecember" @Html.CheckBoxFor(model => model.IsDecember)
+        <label class="btn btn-outline-primary" for="IsDecember">December</label>
+    </div>
+
+
+    @* <button type="submit" class="btn btn-primary">Save</button> *@
+    <div>
+        <input class="btn btn-success mt-2" type="submit" value="Create" />
+    </div>
+</form>

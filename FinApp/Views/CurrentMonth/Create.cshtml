@@ -1,0 +1,35 @@
+﻿@using FinApp.DTO
+@using FinApp.ViewModels
+@model CurrentMonthDTO?
+@{
+    ViewData["Title"] = "Create";
+}
+<div>
+    <a class="btn btn-primary mt-2" asp-controller="MontlyBudgetPlannerVM" asp-action="Index">Back to List</a>
+</div>
+<form asp-controller="CurrentMonth" asp-action="Create">
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label asp-for="Name">Expense</label>
+        <input type="text" asp-for="Name" class="form-control" id="Name" name="Name" value="@Model.Name" />
+    </div>
+    <div class="form-group">
+        <label asp-for="RemainingAmount">Cost/Amount</label>
+        <input type="number" asp-for="RemainingAmount" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input type="text" asp-for="Description" class="form-control" />
+    </div>
+    <div>
+        <label asp-for="BankAccountId">Please pick bank account</label>
+        <select asp-for="BankAccountId" class="form-control" asp-items="ViewBag.bankAccount"></select>
+    </div>
+    <div class="form-check btn-group my-3" role="group">
+        <input type="checkbox" class="form-check-input btn-check" id="IsPaidExpense" name="IsPaidExpense" @Html.CheckBoxFor(model => model.IsPaidExpense)
+        <label class="btn btn-outline-primary" for="IsPaidExpense">Is Paid Expense</label>
+    </div>
+    <div>
+        <input class="btn btn-success mt-2" type="submit" value="Create" />
+    </div>
+</form>

@@ -1,0 +1,28 @@
+﻿@using FinApp.DTO
+@model BankAccountDTO? 
+ @* @model IEnumerable<FinApp.DTO.BankAccountDTO> *@
+     @* @model FinApp.DTO.BankAccountDTO *@
+@{
+    ViewData["Title"] = "Create";
+}
+<div>
+    <a class="btn btn-primary mt-2" asp-controller="BudgetPlannerVM" asp-action="Index">Back to List</a>
+</div>
+<form asp-controller="BankAccount" asp-action="Create">
+    @* odesilame post type submit odkud posilame, asp-action kam posilame *@
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input type="text" asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Amount"></label>
+        <input type="number" asp-for="Amount" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input type="text" asp-for="Description" class="form-control" />
+    </div>
+    <div>
+        <input class="btn btn-success mt-2" type="submit" value="Create" />
+    </div>
+</form>
