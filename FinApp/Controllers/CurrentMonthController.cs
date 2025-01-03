@@ -26,14 +26,9 @@ namespace FinApp.Controllers {
         private async Task GetDropdownValue() {
             var user = await userManager.GetUserAsync(User);
             var bankDropdownValues = await currentMonthService.GetBankDropdownValue(user.Id);
-            var dropdownItems = bankDropdownValues.bankAccounts
-                               .Select(b => new SelectListItem { Value = b.Id.ToString(), Text = b.Name })
-                               .ToList();
-            dropdownItems.Insert(0, new SelectListItem { Value = "0", Text = "Cash" });
 
-            ViewBag.bankAccount = new SelectList(dropdownItems, "Value", "Text");
-         }
-
+            ViewBag.bankAccount = new SelectList(bankDropdownValues.bankAccounts, "Id", "Name");
+        }
         [HttpPost]
         public async Task<IActionResult> CreateAsync(CurrentMonthDTO newCurrentMonthDTO) {
             var user = await userManager.GetUserAsync(User);

@@ -12,7 +12,8 @@ namespace FinApp.Services {
         public MonthlyExpenseService(ApplicationDbContext dbContext) {
             this.dbContext = dbContext;
         }
-        public async Task<BudgetPlannerDropdownVM> GetBankDropdownValue(string userId) {
+    
+        internal async Task<BudgetPlannerDropdownVM> GetBankDropdownValue(string userId) {
             var bankDropdownVM = new BudgetPlannerDropdownVM() {
                 bankAccounts = await dbContext.BankAccounts.Where(x => x.UserId == userId).OrderBy(x => x.Name).ToListAsync(),
             };

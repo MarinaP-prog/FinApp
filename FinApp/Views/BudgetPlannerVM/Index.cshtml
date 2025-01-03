@@ -41,7 +41,8 @@
             <th>Bank or Expense name</th>
             <th>Amount</th>
             <th>Description</th>
-            <th>Which bank account will be used for the payment?</th>
+            <th>Which bank account or cash will be used for the payment?</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -52,36 +53,35 @@
                 <td>@item.Amount</td>
                 <td>
                     @item.Description
+                    
+                </td>
+                <td></td>
+                <td>
                     <form class="" asp-controller="BankAccount" method="post">
 
                         <button class="btn dropdown-toggle position-absolute top-0 end-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         </button>
                         <ul class="dropdown-menu">
                             <li> <a class="btn dropdown-item btn-outline-warning" asp-controller="BankAccount" asp-action="Edit" asp-route-id="@item.Id">Edit</a></li>
-                            <li><a class="btn dropdown-item btn-outline-danger " data-bs-toggle="modal" data-bs-target="#confirmDeleteModal-@item.Id">Delete</a></li>
+                            <li><a class="btn dropdown-item btn-outline-danger " data-bs-toggle="modal" data-bs-target="#confirmDeleteModalExpenses-@item.Id">Delete</a></li>
 
                         </ul>
-
-
-                        @* <input class="btn btn-danger" asp-action="Delete" asp-route-id=@item.Id type="submit" onclick="return confirm('Opravdu chcete tuto položku smazat?');" value="Delete" />  *@
                     </form>
                 </td>
-                <td></td>
             </tr>
-            <!-- Modální okno -->
-            <div class="modal fade" id="confirmDeleteModal-@item.Id" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+            //Modal
+            <div class="modal fade" id="confirmDeleteModalExpenses-@item.Id" tabindex="-1" aria-labelledby="confirmDeleteModalBank" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="confirmDeleteModalLabel">Potvrzení smazání</h5>
+                            <h5 class="modal-title" id="confirmDeleteModalBank">Delete confirmation</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            Opravdu chcete tuto položku smazat?
+                            Are you sure you want to delete this item?
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušit</button>
-                            <!-- Formulář pro potvrzení smazání -->
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             <form asp-controller="BankAccount" asp-action="Delete" method="post">
                                 @Html.AntiForgeryToken()
                                 <input class="btn btn-danger" asp-controller="BankAccount" asp-action="Delete" asp-route-id=@item.Id type="submit" value="Delete" />
@@ -92,9 +92,7 @@
             </div>
 
         }
-        @*   @foreach(var item in Model.MonthlyExpenses){  *@
-        @* @await Html.PartialAsync("/Views/MonthlyExpense/_Index.cshtml", Model.MonthlyExpenses) *@
-        @*  }  *@
+     
         @foreach (var item in Model.MonthlyExpenses)
         {
             <tr class="table-warning position-relative">
@@ -103,7 +101,6 @@
                 <td>
                     @item.Description
                     <form class="" asp-controller="MonthlyExpense" method="post">
-                        @* data-bs-toggle="modal" *@
                         <button class="btn dropdown-toggle position-absolute top-0 end-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         </button>
                         <ul class="dropdown-menu">
@@ -112,25 +109,25 @@
 
                         </ul>
 
-                        @* <input class="btn btn-danger" asp-action="Delete" asp-route-id=@item.Id type="submit" onclick="return confirm('Opravdu chcete tuto položku smazat?');" value="Delete" /> *@
-                    </form>
+                       </form>
                 </td>
                 <td>@item.BankAccountName</td>
+                <td></td>
             </tr>
-            <!-- Modální okno -->
-            <div class="modal fade" id="confirmDeleteModalExpenses-@item.Id" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+
+            <div class="modal fade" id="confirmDeleteModalExpenses-@item.Id" tabindex="-1" aria-labelledby="confirmDeleteModalMonth" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="confirmDeleteModalLabel">Potvrzení smazání</h5>
+                            <h5 class="modal-title" id="confirmDeleteModalMonth">Delete confirmation</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            Opravdu chcete tuto položku smazat?
+                            Are you sure you want to delete this item?
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušit</button>
-                            <!-- Formulář pro potvrzení smazání -->
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                       
                             <form asp-controller="MonthlyExpense" asp-action="Delete" method="post">
                                 @Html.AntiForgeryToken()
                                 <input class="btn btn-danger " asp-controller="MonthlyExpense" asp-action="Delete" asp-route-id=@item.Id type="submit" value="Delete" />
@@ -146,11 +143,13 @@
             <td></td>
             <td>@Model.MonthlyExpensesBalance</td>
             <td></td>
+            <td></td>
         </tr>
         <tr>
             <td class="fw-bold">Account balance</td>
             <td></td>
             <td>@Model.BankAccountsBalance</td>
+            <td></td>
             <td></td>
         </tr>
     </tbody>

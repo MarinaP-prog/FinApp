@@ -33,7 +33,8 @@
             </div>
             <div>
                 <label asp-for="BankAccountId">Please pick bank account</label>
-                <select asp-for="BankAccountId" class="form-control" asp-items="ViewBag.bankAccount"></select>
+                <select asp-for="BankAccountId" class="form-control" asp-items="ViewBag.bankAccount">
+                </select>
             </div>
             <div class="form-check btn-group my-3" role="group">
                 <input type="checkbox" class="form-check-input btn-check" id="IsPaidExpense" name="IsPaidExpense" @Html.CheckBoxFor(model => model.IsPaidExpense)
