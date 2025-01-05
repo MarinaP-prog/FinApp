@@ -65,3 +65,7 @@ Future Enhancements
 Budget visualization with charts.
 
 Registration
+
+License
+
+This project is licensed under the MIT License.
