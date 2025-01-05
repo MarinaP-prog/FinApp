@@ -50,10 +50,10 @@ Key Features
 
 ## How to Use
 
-- Sign In: Log in to access your dashboard.
+- Log in with provided user name to access test dashboard. (Users - _PetrNovak_, _BlankaNovotna_, Admin - _BigSef_, Password - The <span>password</span> consists of the first four letters of the alphabet, with the first letter capitalized, followed by the first four digits, starting with one, and ending with a dot.)
 
 - Manage Bank Accounts: Add your bank accounts and track balances.
-
+ 
 - Set Up Monthly Budgets: Define your monthly expenses.
 
 - Track Expenses: Add and mark expenses as paid.
