@@ -50,7 +50,7 @@ Key Features
 
 ## How to Use
 
-- Log in with provided user name to access test dashboard. (Users - _PetrNovak_, _BlankaNovotna_, Admin - _BigSef_, Password - The <span>password</span> consists of the first four letters of the alphabet, with the first letter capitalized, followed by the first four digits, starting with one, and ending with a dot
+- Log in with provided user name to access test dashboard. Users - _PetrNovak_, _BlankaNovotna_, Admin - _BigSef_, Password - The password consists of the first four letters of the alphabet, with the first letter capitalized, followed by the first four digits, starting with one, and ending with a dot
 
 - Manage Bank Accounts: Add your bank accounts and track balances.
  
