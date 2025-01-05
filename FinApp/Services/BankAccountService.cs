@@ -26,21 +26,21 @@ namespace FinApp.Services {
 
         }
         public async Task CreateAsync(BankAccountDTO newBankAccount) {
-           
-            await dbContext.BankAccounts.AddAsync(dtoToModel(newBankAccount));
+            BankAccount bankAccountToInsert = await dtoToModel(newBankAccount);
+            await dbContext.BankAccounts.AddAsync(bankAccountToInsert);
             await dbContext.SaveChangesAsync();
         }
         public async Task<BankAccountDTO> getByIdAsync(int id) {
-            var bankAccountToEdit = await dbContext.BankAccounts.FirstOrDefaultAsync(x => x.Id == id);// FirstOrDefaultAsync - vytahne jednoho studenta nebo vrati default
-            if (bankAccountToEdit == null) { return null; }//nevyhodi chybu IndexOutOfRange
+            var bankAccountToEdit = await dbContext.BankAccounts.FirstOrDefaultAsync(x => x.Id == id);
+            if (bankAccountToEdit == null) { return null; }
             return modelToDto(bankAccountToEdit);
         }
        
 
-        internal async Task<BankAccountDTO> UpdateAsync(int id, BankAccountDTO updateBankAccount) {
-            dbContext.Update(dtoToModel(updateBankAccount));
+        internal async Task UpdateAsync(BankAccountDTO updateBankAccount) {
+            BankAccount bankAccountToEdit = await dtoToModel(updateBankAccount);
+            dbContext.BankAccounts.Update(bankAccountToEdit);
             await dbContext.SaveChangesAsync();
-            return updateBankAccount; 
         }
         private BankAccountDTO modelToDto(BankAccount account) {
             return new BankAccountDTO() {
@@ -52,7 +52,7 @@ namespace FinApp.Services {
                 Cash = account.Cash,
             };
         }
-        private BankAccount dtoToModel(BankAccountDTO bankAccount) {
+        private async Task<BankAccount> dtoToModel(BankAccountDTO bankAccount) {
             return new BankAccount() {
                 Id = bankAccount.Id,
                 Name = bankAccount.Name,

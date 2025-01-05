@@ -42,7 +42,12 @@ namespace FinApp.Controllers {
 
         [HttpPost]
         public async Task<IActionResult> EditAsync(int id, BankAccountDTO bankAccount) {
-            await bankAccountService.UpdateAsync(id, bankAccount);
+            var user = await userManager.GetUserAsync(User);
+            if (user == null) {
+                return RedirectToAction("Login", "Account");
+            }
+            bankAccount.UserId = user.Id;
+            await bankAccountService.UpdateAsync(bankAccount);
             return RedirectToAction("Index", "BudgetPlannerVM");
         }
         [HttpPost] // delete action

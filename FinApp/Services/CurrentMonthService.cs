@@ -180,5 +180,11 @@ namespace FinApp.Services {
             };
             return bankDropdownVM;
         }
+
+        internal async Task DeleteAsync(int id) {
+            var currentExpenseToDelete = await dbContext.CurrentMonths.FirstOrDefaultAsync(expense => expense.Id == id);
+            dbContext.CurrentMonths.Remove(currentExpenseToDelete);
+            await dbContext.SaveChangesAsync();
+        }
     }
 }

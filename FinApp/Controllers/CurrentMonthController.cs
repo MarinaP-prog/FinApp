@@ -69,5 +69,15 @@ namespace FinApp.Controllers {
             await currentMonthService.DeleteAllAsync(user.Id);
             return RedirectToAction("Index", "MontlyBudgetPlannerVM");
         }
+        [HttpPost]
+        public async Task<IActionResult> DeleteAsync(int id) {
+
+            var currentExpensesToDelete = await currentMonthService.GetByIdAsync(id);
+            if (currentExpensesToDelete == null) {
+                return View("NotFound");
+            }
+            await currentMonthService.DeleteAsync(id);
+            return RedirectToAction("Index", "MontlyBudgetPlannerVM");
+        }
     }
 }
