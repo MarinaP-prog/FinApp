@@ -1,8 +1,9 @@
 # FinApp
 Overview
 
-FinApp is a web application designed to help users manage their personal or business finances efficiently. With an intuitive interface and robust functionality, FinApp simplifies budget planning, expense tracking, and financial monitoring.
-Key Features
+FinApp is a web application designed to help users manage their personal or business finances efficiently. With an intuitive interface and functionality, FinApp simplifies budget planning.
+
+## Key Features
 
 ## Bank Account Management
 
@@ -16,15 +17,11 @@ Key Features
 
 - Automatically copy recurring monthly expenses.
 
-- Mark expenses as paid and monitor the remaining balance.
-
-## Expense Tracking
-
-- Create, edit, and delete individual expenses.
-
 - Mark expenses as paid.
 
-- Calculate monthly balance dynamically.
+## Yearly Expense Tracking
+
+- Create, edit, and delete individual expenses.
 
 ## User and Role Management
 
@@ -50,7 +47,7 @@ Key Features
 
 ## How to Use
 
-- Log in with provided user name to access test dashboard. Users - _PetrNovak_, _BlankaNovotna_, Admin - _BigSef_, Password - The password consists of the first four letters of the alphabet, with the first letter capitalized, followed by the first four digits, starting with one, and ending with a dot
+- Log in with provided user name to access test environment. Users - _PetrNovak_, _BlankaNovotna_, Admin - _BigSef_, Password - The password consists of the first four letters of the alphabet, with the first letter capitalized, followed by the first four digits, starting with one, and ending with a dot
 
 - Manage Bank Accounts: Add your bank accounts and track balances.
  
