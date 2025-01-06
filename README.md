@@ -61,7 +61,9 @@ FinApp is a web application designed to help users manage their personal or busi
 
 - Budget visualization with charts.
 
-- Registration
+- Registration.
+
+- Distinction between an individual and a self-employed person.
 
 ## License
 
