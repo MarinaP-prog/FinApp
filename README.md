@@ -1,6 +1,3 @@
-# FinApp
-Overview
-
 FinApp is a web application designed to help users manage their personal or business finances efficiently. With an intuitive interface and functionality, FinApp simplifies budget planning.
 
 ## Key Features
